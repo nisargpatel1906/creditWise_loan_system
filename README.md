@@ -263,16 +263,22 @@ The same three models are retrained and evaluated on the engineered feature set 
 
 ## Results Summary
 
-| Model | Stage | Accuracy | Precision | Recall | F1 Score |
-|---|---|---|---|---|---|
-| Logistic Regression | Before FE | — | — | — | — |
-| KNN | Before FE | — | — | — | — |
-| Naive Bayes | Before FE | — | — | — | — |
-| Logistic Regression | After FE | — | — | — | — |
-| KNN | After FE | — | — | — | — |
-| Naive Bayes | After FE | — | — | — | — |
+| Model | Stage | Confusion Matrix (TN/FP/FN/TP) | Accuracy | Precision | Recall | F1 Score |
+|---|---|---|---|---|---|---|
+| Logistic Regression | Before FE | TN=126, FP=13, FN=14, TP=47 | 0.8650 | 0.7833 | 0.7705 | 0.7769 |
+| KNN | Before FE | TN=120, FP=19, FN=29, TP=32 | 0.7600 | 0.6275 | 0.5246 | 0.5714 |
+| Naive Bayes | Before FE | TN=128, FP=11, FN=16, TP=45 | 0.8650 | 0.8036 | 0.7377 | 0.7692 |
+| Logistic Regression | After FE | TN=125, FP=14, FN=12, TP=49 | **0.8700** | 0.7778 | **0.8033** | **0.7903** |
+| KNN | After FE | TN=119, FP=20, FN=27, TP=34 | 0.7650 | 0.6296 | 0.5574 | 0.5913 |
+| Naive Bayes | After FE | TN=128, FP=11, FN=16, TP=45 | 0.8650 | 0.8036 | 0.7377 | 0.7692 |
 
-> Run the notebook (`creditWise_loan_system.ipynb`) to populate the results table with actual values.
+**Key Observations:**
+- **Logistic Regression** benefited the most from feature engineering — accuracy improved from 86.5% → **87.0%** and recall jumped from 77.05% → **80.33%**, meaning it caught more actual approvals.
+- **Naive Bayes** was unaffected by the engineered features, producing identical results before and after.
+- **KNN** showed marginal improvement in recall (+3.3%) but remains the weakest overall performer.
+- Best overall model: **Logistic Regression (After Feature Engineering)** with F1 Score of **0.7903**.
+
+> Test set size: 200 samples (80/20 split, `random_state=42`). Positive class = Loan Approved.
 
 ---
 
